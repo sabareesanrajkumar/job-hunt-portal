@@ -4,8 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Hunt</title>
+    <link rel="stylesheet" href="../css/jobhunt.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <h4>Job hunt webpage</h4>
+    <div id="header">
+        <div id="nav-bar">
+            <ul class="nav-list">
+                <li id="profile-list">Profile</li>
+                <li id="applications-list">Applications</li>
+                <li id="companies-list">Companies</li>
+            </ul>
+        </div>
+    </div>
+    <div id="container">
+        <div id="profile-container">
+            <h3>profile</h3>
+            <button id="edit-profile-btn">Edit profile</button>
+            <div id="profile-details"></div>
+            <div id="edit-profile-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>User Details</h2>
+                    <form id="edit-profile">
+                        <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        <input type="text" id="college" name="college" placeholder="College" required>
+                        <input type="text" id="degree" name="degree" placeholder="Degree" required>
+                        <input type="text" id="branch" name="branch" placeholder="Branch" required>
+                        <input type="number" id="graduation" name="graduation" placeholder="Year of Graduation" required>
+                        <input type="number" id="score" name="score" placeholder="Overall Academic Score" required>
+                        <input type="text" id="goals" name="goals" placeholder="Career goals" required>
+                        <button type="submit">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="applications-container">
+            <h3>applications</h3>
+        </div>
+        <div id="companies-container">
+            <h3>companies</h3>
+        </div>
+    </div>
+
+    <script src="../scripts/jobHunt.js"></script>
 </body>
 </html>
