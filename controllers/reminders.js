@@ -2,7 +2,10 @@ const Reminders = require("../models/reminders");
 
 exports.getReminders = async (req, res, next) => {
   try {
-    return res.status(201);
+    const userReminders = await Reminders.findAll({
+      where: { userId: req.user.id },
+    });
+    return res.status(200).json({ success: true, userReminders });
   } catch (err) {
     return res.status(500).json({ success: false, err: err.message });
   }

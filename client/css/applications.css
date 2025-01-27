@@ -1,4 +1,4 @@
-#applications-container {
+#applications-container,#companies-container,#profile-container,#reminder-container {
     display: none;
     flex-direction: column;
     gap: 20px; 
@@ -50,9 +50,10 @@ h3 {
     padding-bottom: 5px;
 }
 
+
 #applicationsList{
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
@@ -94,3 +95,13 @@ h3 {
     background-color: #0b7dda;
 }
   
+
+.reminder-item{
+    display:flex;
+    justify-content:space-around;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}

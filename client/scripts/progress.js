@@ -48,7 +48,7 @@
           ],
           datasets: [
             {
-              data: [10, 5, 3, 7],
+              data: [],
               backgroundColor: ["#007bff", "#ffc107", "#28a745", "#dc3545"],
             },
           ],

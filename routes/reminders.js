@@ -10,4 +10,10 @@ router.post(
   reminderController.addReminder
 );
 
+router.get(
+  "/getreminders",
+  authenticationController.authenticate,
+  reminderController.getReminders
+);
+
 module.exports = router;

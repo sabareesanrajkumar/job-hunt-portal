@@ -3,7 +3,14 @@ const companies = require("../models/companies");
 
 exports.getCompanies = async (req, res, next) => {
   try {
-    return res.status(201);
+    const allCompanies = await companies.findAll({
+      where: { userId: req.user.id },
+    });
+    if (allCompanies) {
+      return res.status(200).json({ success: true, allCompanies });
+    } else {
+      return res.status(201).json({ success: true, allCompanies });
+    }
   } catch (err) {
     return res.status(500).json({ success: false, err: err.message });
   }
