@@ -2,11 +2,13 @@ const profileList = document.getElementById("profile-list");
 const applicationList = document.getElementById("applications-list");
 const companiesList = document.getElementById("companies-list");
 const reminderList = document.getElementById("reminder-list");
+const progressList = document.getElementById("progress-list");
 
 const profileContainer = document.getElementById("profile-container");
 const applicationContainer = document.getElementById("applications-container");
 const companiesContainer = document.getElementById("companies-container");
 const reminderContainer = document.getElementById("reminder-container");
+const progressContainer = document.getElementById("progress-container");
 
 const token = localStorage.getItem("token");
 const backendApi = `http://localhost:3000`;
@@ -16,19 +18,16 @@ profileList.addEventListener("click", () => {
   applicationContainer.style.display = "none";
   companiesContainer.style.display = "none";
   reminderContainer.style.display = "none";
+  progressContainer.style.display = "none";
   showProfile();
 });
-applicationList.addEventListener("click", () => {
-  profileContainer.style.display = "none";
-  applicationContainer.style.display = "flex";
-  companiesContainer.style.display = "none";
-  reminderContainer.style.display = "none";
-});
+
 companiesList.addEventListener("click", () => {
   profileContainer.style.display = "none";
   applicationContainer.style.display = "none";
   companiesContainer.style.display = "flex";
   reminderContainer.style.display = "none";
+  progressContainer.style.display = "none";
 });
 
 reminderList.addEventListener("click", () => {
@@ -36,6 +35,7 @@ reminderList.addEventListener("click", () => {
   applicationContainer.style.display = "none";
   companiesContainer.style.display = "none";
   reminderContainer.style.display = "flex";
+  progressContainer.style.display = "none";
 });
 
 async function showProfile() {

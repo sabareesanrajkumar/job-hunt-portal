@@ -1,0 +1,36 @@
+#progress-container {
+    display: none;
+    width: 100%;
+    min-height: 85vh;
+    margin: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard {
+    width: 100%;
+    text-align: center;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: #007bff;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.chart-container {
+    width: 60%;
+    margin: auto;
+}
+
+

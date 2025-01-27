@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Hunt</title>
     <link rel="stylesheet" href="../css/jobhunt.css">
+    <link rel="stylesheet" href="../css/progress.css">
+    <link rel="stylesheet" href="../css/applications.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div id="header">
@@ -43,8 +46,44 @@
         </div>
 
         <div id="applications-container">
-            <h3>applications</h3>
+            <h2>Applications</h2>
+            <div class="header">
+                <div class="search">
+                    <input type="text" id="search-keyword" placeholder="Search by company or job title">
+                    <button id="search-button">Search</button>
+                </div>
+                <button id="add-application-btn">Add Application</button>
+            </div>
+            <h3>Applications List</h3>
+            <div id="applicationsList">
+                <ul id="applications"></ul>
+            </div>
+            <div id="application-details"></div>
+            <div id="add-application-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-application-modal">&times;</span>
+                    <h3>Application Details</h3>
+                    <form id="add-application">
+                        <input type="text" id="job-title" name="jobTitle" placeholder="Job Title" required>
+                        <input type="text" id="company-nanme" name="companyName" placeholder="Company Name" required>
+                        <label for="dateApplied">Date Applied:</label>
+                        <input type="date" id="dateApplied" name="dateApplied" required>
+                        <label for="status">Status:</label>
+                        <select id="status" name="status">
+                            <option value="Applied">Applied</option>
+                            <option value="Interview Scheduled">Interview Scheduled</option>
+                            <option value="Offer Received">Offer Received</option>
+                        </select>
+                        <label for="notes">Notes:</label>
+                        <textarea id="notes" name="notes"></textarea>
+                        <label for="attachments">Attach Files:</label>
+                        <input type="file" id="attachments" name="attachments" multiple>
+                        <button type="submit">Add Application</button>
+                    </form>
+                </div>
+            </div>
         </div>
+
         <div id="companies-container">
             <h3>companies</h3>
             <button id="add-company-btn">Add Company</button>
@@ -87,10 +126,32 @@
                     </form>
                 </div>
             </div>
+        </div>
+
+        <div id="progress-container">
+            <div class="dashboard">
+                <h3>Job Tracker Dashboard</h3>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>Total Applications</h3>
+                        <p id="totalApplications">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Applications In Progress</h3>
+                        <p id="inProgressApplications">0</p>
+                    </div>
+                </div>
+        
+                <div class="chart-container">
+                    <canvas id="applicationsChart"></canvas>
+                </div>
+            </div>
 
         </div>
     </div>
 
     <script src="../scripts/jobHunt.js"></script>
+    <script src="../scripts/progress.js"></script>
+    <script src="../scripts/applications.js"></script>
 </body>
 </html>

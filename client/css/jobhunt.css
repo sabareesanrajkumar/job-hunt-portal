@@ -76,7 +76,7 @@ body {
     }
 }
 
-#edit-profile-btn,#add-company-btn,#add-reminder-btn  {
+#edit-profile-btn, #add-company-btn, #add-reminder-btn, #add-application-btn  {
 
     height: 25px;
     margin-left: 20px;
@@ -92,7 +92,7 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-#edit-profile-btn:hover {
+#edit-profile-btn:hover, #add-company-btn:hover, #add-reminder-btn:hover, #add-application-btn:hover {
     background: #006ee2;
     transform: scale(1.05);
 }
@@ -121,7 +121,7 @@ body {
     gap:5px;
 }
 
-.close-modal,.close-company-modal,.close-reminder-modal {
+.close-modal,.close-company-modal,.close-reminder-modal,.close-application-modal {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -129,7 +129,7 @@ body {
     cursor: pointer;
 }
 
-#edit-profile,#add-company,#add-reminder {
+#edit-profile,#add-company,#add-reminder,#add-application {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -141,7 +141,7 @@ body {
     max-width: 400px;
 }
 
-#edit-profile input, #add-company input,#add-reminder input {
+#edit-profile input, #add-company input,#add-reminder input,#add-application input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -150,12 +150,12 @@ body {
     transition: border-color 0.3s ease-in-out;
 }
 
-#edit-profile input:focus,#add-company input:focus,#add-reminder input:focus {
+#edit-profile input:focus,#add-company input:focus,#add-reminder input:focus,#add-application input:focus {
     border-color: #007bff;
     outline: none;
 }
 
-#edit-profile button,#add-company button,#add-reminder button {
+#edit-profile button,#add-company button,#add-reminder button,#add-application button {
     background: #007bff;
     color: #fff;
     padding: 10px;
@@ -166,7 +166,7 @@ body {
     transition: background 0.3s ease-in-out;
 }
 
-#edit-profile button:hover,#add-company button:hover,#add-reminder button:hover {
+#edit-profile button:hover,#add-company button:hover,#add-reminder button:hover,#add-application button:hover {
     background: #0056b3;
 }
 

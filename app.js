@@ -15,18 +15,23 @@ const passwordRoutes = require("./routes/password");
 const profileRoutes = require("./routes/profile");
 const companyRoutes = require("./routes/companies");
 const reminderRoutes = require("./routes/reminders");
+const progressRoutes = require("./routes/progress");
+const applicationRoutes = require("./routes/applications");
 
 app.use("/user", userRoutes);
 app.use("/password", passwordRoutes);
 app.use("/profile", profileRoutes);
 app.use("/company", companyRoutes);
 app.use("/reminder", reminderRoutes);
+app.use("/progress", progressRoutes);
+app.use("/application", applicationRoutes);
 
 const Users = require("./models/users");
 const passwordRequests = require("./models/passwordRequests");
 const Profiles = require("./models/profile");
 const Companies = require("./models/companies");
 const Reminders = require("./models/reminders");
+const Applications = require("./models/applications");
 
 cron.schedule("*/60 * * * *", async () => {
   const now = new Date()
@@ -62,6 +67,13 @@ Users.hasMany(Reminders, {
   foreignKey: "userId",
 });
 Reminders.belongsTo(Users, {
+  foreignKey: "userId",
+});
+
+Users.hasMany(Applications, {
+  foreignKey: "userId",
+});
+Applications.belongsTo(Users, {
   foreignKey: "userId",
 });
 
