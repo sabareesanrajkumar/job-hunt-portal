@@ -14,6 +14,8 @@
                 <li id="profile-list">Profile</li>
                 <li id="applications-list">Applications</li>
                 <li id="companies-list">Companies</li>
+                <li id="reminder-list">Reminders</li>
+                <li id="progress-list">progress</li>
             </ul>
         </div>
     </div>
@@ -45,6 +47,47 @@
         </div>
         <div id="companies-container">
             <h3>companies</h3>
+            <button id="add-company-btn">Add Company</button>
+            <div id="Company-details"></div>
+            <div id="add-company-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-company-modal">&times;</span>
+                    <h2>company Details</h2>
+                    <form id="add-company">
+                        <input type="text" id="name" name="name" placeholder="Company Name" required>
+                        <input type="text" id="location" name="location" placeholder="Job Location" required>
+                        <input type="text" id="address" name="address" placeholder="Company Address" required>
+                        <input type="email" id="email" name="email" placeholder="email" required>
+                        <input type="number" id="contact" name="contact" placeholder="Contact Details" required>
+                        <input type="number" id="size" name="size" placeholder="Compnay Size (No. of Employees)" required>
+                        <input type="text" id="industry" name="industry" placeholder="Industry" required>
+                        <button type="submit">Add company</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="reminder-container">
+            <h3>Reminders</h3>
+            <button id="add-reminder-btn">Add Reminder</button>
+            <div id="Remainders"></div>
+            <div id="add-reminder-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-reminder-modal">&times;</span>
+                    <h2>Reminder</h2>
+                    <form id="add-reminder">
+                        <input type="text" id="name" name="name" placeholder="Company Name" required>
+                        <input type="text" id="application" name="application" placeholder="application" required>
+                        <label for="due">Set Application Due Date & Time:</label>
+                        <input type="datetime-local" id="due" name="due" placeholder="Application Due" required>
+                        <label for="reminder">Set Reminder Date & Time:</label>
+                        <input type="datetime-local" id="reminder" name="reminder" placeholder="Reminder Time" required>
+                        <button type="submit">Add Reminder</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 

@@ -54,7 +54,7 @@ body {
     margin-top: 20px;
 }
 
-#profile-container, #applications-container, #companies-container {
+#profile-container,#applications-container,#companies-container,#reminder-container {
     display: none;
     width: 100%;
     min-height: 85vh;
@@ -76,7 +76,7 @@ body {
     }
 }
 
-#edit-profile-btn {
+#edit-profile-btn,#add-company-btn,#add-reminder-btn  {
 
     height: 25px;
     margin-left: 20px;
@@ -121,7 +121,7 @@ body {
     gap:5px;
 }
 
-.close-modal {
+.close-modal,.close-company-modal,.close-reminder-modal {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -129,7 +129,7 @@ body {
     cursor: pointer;
 }
 
-#edit-profile {
+#edit-profile,#add-company,#add-reminder {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -141,7 +141,7 @@ body {
     max-width: 400px;
 }
 
-#edit-profile input {
+#edit-profile input, #add-company input,#add-reminder input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -150,12 +150,12 @@ body {
     transition: border-color 0.3s ease-in-out;
 }
 
-#edit-profile input:focus {
+#edit-profile input:focus,#add-company input:focus,#add-reminder input:focus {
     border-color: #007bff;
     outline: none;
 }
 
-#edit-profile button {
+#edit-profile button,#add-company button,#add-reminder button {
     background: #007bff;
     color: #fff;
     padding: 10px;
@@ -166,7 +166,7 @@ body {
     transition: background 0.3s ease-in-out;
 }
 
-#edit-profile button:hover {
+#edit-profile button:hover,#add-company button:hover,#add-reminder button:hover {
     background: #0056b3;
 }
 

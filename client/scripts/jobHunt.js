@@ -1,10 +1,12 @@
 const profileList = document.getElementById("profile-list");
 const applicationList = document.getElementById("applications-list");
 const companiesList = document.getElementById("companies-list");
+const reminderList = document.getElementById("reminder-list");
 
 const profileContainer = document.getElementById("profile-container");
 const applicationContainer = document.getElementById("applications-container");
 const companiesContainer = document.getElementById("companies-container");
+const reminderContainer = document.getElementById("reminder-container");
 
 const token = localStorage.getItem("token");
 const backendApi = `http://localhost:3000`;
@@ -13,17 +15,27 @@ profileList.addEventListener("click", () => {
   profileContainer.style.display = "flex";
   applicationContainer.style.display = "none";
   companiesContainer.style.display = "none";
+  reminderContainer.style.display = "none";
   showProfile();
 });
 applicationList.addEventListener("click", () => {
   profileContainer.style.display = "none";
   applicationContainer.style.display = "flex";
   companiesContainer.style.display = "none";
+  reminderContainer.style.display = "none";
 });
 companiesList.addEventListener("click", () => {
   profileContainer.style.display = "none";
   applicationContainer.style.display = "none";
   companiesContainer.style.display = "flex";
+  reminderContainer.style.display = "none";
+});
+
+reminderList.addEventListener("click", () => {
+  profileContainer.style.display = "none";
+  applicationContainer.style.display = "none";
+  companiesContainer.style.display = "none";
+  reminderContainer.style.display = "flex";
 });
 
 async function showProfile() {
@@ -45,9 +57,24 @@ document.getElementById("edit-profile-btn").addEventListener("click", () => {
   document.getElementById("edit-profile-modal").style.display = "flex";
 });
 
+document.getElementById("add-company-btn").addEventListener("click", () => {
+  document.getElementById("add-company-modal").style.display = "flex";
+});
+document.getElementById("add-reminder-btn").addEventListener("click", () => {
+  document.getElementById("add-reminder-modal").style.display = "flex";
+});
+
 document.querySelector(".close-modal").addEventListener("click", () => {
   document.getElementById("edit-profile-modal").style.display = "none";
 });
+document.querySelector(".close-company-modal").addEventListener("click", () => {
+  document.getElementById("add-company-modal").style.display = "none";
+});
+document
+  .querySelector(".close-reminder-modal")
+  .addEventListener("click", () => {
+    document.getElementById("add-reminder-modal").style.display = "none";
+  });
 
 async function renderProfile(userData) {
   console.log(userData);
@@ -91,5 +118,52 @@ document
 
       document.getElementById("edit-profile-modal").style.display = "none";
       showProfile();
+    }
+  });
+
+document
+  .getElementById("add-company")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = {
+      name: event.target.name.value,
+      location: event.target.location.value,
+      address: event.target.address.value,
+      email: event.target.email.value,
+      contact: event.target.contact.value,
+      companySize: event.target.size.value,
+      industry: event.target.industry.value,
+    };
+    const editResponse = await axios.post(
+      `${backendApi}/company/addcompany`,
+      formData,
+      { headers: { Authorization: token } }
+    );
+    if (editResponse.status == 200) {
+      alert("company added");
+
+      document.getElementById("add-company-modal").style.display = "none";
+    }
+  });
+
+document
+  .getElementById("add-reminder")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = {
+      name: event.target.name.value,
+      application: event.target.application.value,
+      due: event.target.due.value,
+      reminder: event.target.reminder.value,
+    };
+    const editResponse = await axios.post(
+      `${backendApi}/reminder/addreminder`,
+      formData,
+      { headers: { Authorization: token } }
+    );
+    if (editResponse.status == 200) {
+      alert("company added");
+
+      document.getElementById("add-reminder-modal").style.display = "none";
     }
   });
