@@ -43,3 +43,13 @@ exports.updateApplication = async (req, res, next) => {
     return res.status(500).json({ success: false, err: err.message });
   }
 };
+
+exports.deleteApplication = async (req, res, next) => {
+  try {
+    const oldApplication = await Applications.findByPk(req.params.id);
+    await oldApplication.destroy();
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    return res.status(500).json({ success: false, err: err.message });
+  }
+};

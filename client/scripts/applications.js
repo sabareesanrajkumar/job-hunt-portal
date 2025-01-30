@@ -74,10 +74,14 @@
       <input type="file" class="attachments-input" multiple>
 
       <button class="update-btn">Update</button>
+      <button class="delete-btn">Delete</button>
     `;
         appDiv
           .querySelector(".update-btn")
           .addEventListener("click", () => updateApplication(app.id, appDiv));
+        appDiv
+          .querySelector(".delete-btn")
+          .addEventListener("click", () => deleteApplication(app.id));
 
         applicationRecord.appendChild(appDiv);
       });
@@ -94,11 +98,26 @@
         { status, notes },
         { headers: { Authorization: token } }
       );
+      console.log(response);
+      if (response.status == 200) {
+        alert("Application updated successfully!");
+      }
+    } catch (error) {
+      console.error("Error updating application:", error);
+    }
+  }
 
-      if (!response.ok) throw new Error("Failed to update");
-      showApplications();
-
-      alert("Application updated successfully!");
+  async function deleteApplication(id) {
+    try {
+      const response = await axios.delete(
+        `${backendApi}/application/delete/${id}`,
+        { headers: { Authorization: token } }
+      );
+      console.log(response);
+      if (response.status == 200) {
+        alert("Application deleted successfully!");
+        showApplications();
+      }
     } catch (error) {
       console.error("Error updating application:", error);
     }

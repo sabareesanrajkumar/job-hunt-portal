@@ -22,4 +22,10 @@ router.put(
   applicationController.updateApplication
 );
 
+router.delete(
+  "/delete/:id",
+  authenticationController.authenticate,
+  applicationController.deleteApplication
+);
+
 module.exports = router;

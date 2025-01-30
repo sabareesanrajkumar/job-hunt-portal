@@ -16,4 +16,10 @@ router.post(
   companiesController.addCompany
 );
 
+router.delete(
+  "/delete/:id",
+  authenticationController.authenticate,
+  companiesController.deleteCompany
+);
+
 module.exports = router;

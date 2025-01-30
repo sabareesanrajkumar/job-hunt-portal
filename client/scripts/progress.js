@@ -18,26 +18,32 @@
     companiesContainer.style.display = "none";
     reminderContainer.style.display = "none";
     progressContainer.style.display = "flex";
+    getDashboard();
   });
 
-  document.addEventListener("DOMContentLoaded", async () => {
+  async function getDashboard() {
     try {
-      const response = await axios.get(`${backendApi}/progress/dashboard`);
-      //const data = await response.json();
+      const response = await axios.get(`${backendApi}/progress/getdashboard`, {
+        headers: { Authorization: token },
+      });
 
-      data = {
-        upcomingInterviews: [
-          { company: "google", interviewDate: "20/05/2025" },
-          { company: "ms", interviewDate: "20/02/2025" },
-        ],
-      };
+      const data = response.data;
       document.getElementById("totalApplications").textContent =
         data.totalApplications;
       document.getElementById("inProgressApplications").textContent =
         data.inProgressApplications;
 
-      const ctx = document.getElementById("applicationsChart").getContext("2d");
-      new Chart(ctx, {
+      const canvas = document.getElementById("applicationsChart");
+      const ctx = canvas.getContext("2d");
+
+      if (window.applicationsChart instanceof Chart) {
+        window.applicationsChart.destroy();
+        window.applicationsChart = null;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      window.applicationsChart = new Chart(ctx, {
         type: "pie",
         data: {
           labels: [
@@ -48,7 +54,12 @@
           ],
           datasets: [
             {
-              data: [],
+              data: [
+                data.statusData["Applied"] || 0,
+                data.statusData["Interview Scheduled"] || 0,
+                data.statusData["Offer Received"] || 0,
+                data.statusData["Rejected"] || 0,
+              ],
               backgroundColor: ["#007bff", "#ffc107", "#28a745", "#dc3545"],
             },
           ],
@@ -57,5 +68,5 @@
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
     }
-  });
+  }
 }

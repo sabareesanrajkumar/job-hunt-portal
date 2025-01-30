@@ -93,6 +93,7 @@ async function showReminders() {
 
 document.getElementById("edit-profile-btn").addEventListener("click", () => {
   document.getElementById("edit-profile-modal").style.display = "flex";
+  checkExistingProfile();
 });
 
 document.getElementById("add-company-btn").addEventListener("click", () => {
@@ -149,10 +150,29 @@ function renderCompanies(companies) {
       <p><strong>Contact:</strong> ${company.contact}</p>
       <p><strong>Company Size:</strong> ${company.companySize}</p>
       <p><strong>Industry:</strong> ${company.industry}</p>
+      <button class="delete-btn">Delete</button>
     `;
+    companyCard
+      .querySelector(".delete-btn")
+      .addEventListener("click", () => deleteCompany(company.id));
 
     companyDetails.appendChild(companyCard);
   });
+}
+
+async function deleteCompany(id) {
+  try {
+    const response = await axios.delete(`${backendApi}/company/delete/${id}`, {
+      headers: { Authorization: token },
+    });
+    console.log(response);
+    if (response.status == 200) {
+      alert("company deleted successfully!");
+      showCompanies();
+    }
+  } catch (error) {
+    console.error("Error updating application:", error);
+  }
 }
 
 function renderReminders(reminders) {
@@ -170,6 +190,23 @@ function renderReminders(reminders) {
 
     reminderDetails.appendChild(reminderItem);
   });
+}
+
+async function checkExistingProfile() {
+  const existingProfile = await axios.get(`${backendApi}/profile/check`, {
+    headers: { Authorization: token },
+  });
+  if (existingProfile.status == 200) {
+    const user = existingProfile.data.userProfile;
+    const formElement = document.getElementById("edit-profile");
+    formElement.name.value = user.fullName;
+    formElement.college.value = user.college;
+    formElement.degree.value = user.degree;
+    formElement.branch.value = user.branch;
+    formElement.graduation.value = user.graduation;
+    formElement.goals.value = user.goals;
+    formElement.score.value = user.score;
+  }
 }
 
 document

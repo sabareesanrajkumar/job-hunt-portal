@@ -37,3 +37,13 @@ exports.addCompany = async (req, res, next) => {
     return res.status(500).json({ success: false, err: err.message });
   }
 };
+
+exports.deleteCompany = async (req, res, next) => {
+  try {
+    const oldCompany = await companies.findByPk(req.params.id);
+    await oldCompany.destroy();
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    return res.status(500).json({ success: false, err: err.message });
+  }
+};

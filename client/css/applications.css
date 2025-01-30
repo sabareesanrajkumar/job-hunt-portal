@@ -94,6 +94,19 @@ h3 {
 .update-btn:hover {
     background-color: #0b7dda;
 }
+
+.delete-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #e63137;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+  
+.delete-btn:hover {
+    background-color: #b81c1c;
+}
   
 
 .reminder-item{
@@ -104,4 +117,31 @@ h3 {
     border-radius: 5px;
     padding: 15px;
     margin-bottom: 15px;
+}
+
+
+.profile-item {
+    list-style-type: none;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+.profile-item li {
+    padding: 8px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-item li:last-child {
+    border-bottom: none;
+}
+
+.profile-item li strong {
+    font-weight: bold;
+    color: #333;
 }

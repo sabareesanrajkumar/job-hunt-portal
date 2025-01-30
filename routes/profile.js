@@ -9,6 +9,12 @@ router.get(
   authenticationController.authenticate,
   profileController.getProfile
 );
+
+router.get(
+  "/check",
+  authenticationController.authenticate,
+  profileController.checkExistense
+);
 router.post(
   "/editprofile",
   authenticationController.authenticate,

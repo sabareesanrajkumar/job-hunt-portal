@@ -56,3 +56,16 @@ exports.editProfile = async (req, res, next) => {
     return res.status(500).json({ success: false, err: err.message });
   }
 };
+
+exports.checkExistense = async (req, res, next) => {
+  try {
+    const userProfile = await Profile.findByPk(req.user.id);
+    if (userProfile) {
+      return res.status(200).json({ userProfile });
+    } else {
+      return res.status(201).json({ message: "create new profile" });
+    }
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+};
