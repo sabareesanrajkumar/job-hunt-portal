@@ -1,4 +1,5 @@
 const Applications = require("../models/applications");
+const Sequelize = require("sequelize");
 
 exports.addApplication = async (req, res, next) => {
   try {
@@ -49,6 +50,24 @@ exports.deleteApplication = async (req, res, next) => {
     const oldApplication = await Applications.findByPk(req.params.id);
     await oldApplication.destroy();
     return res.status(200).json({ success: true });
+  } catch (err) {
+    return res.status(500).json({ success: false, err: err.message });
+  }
+};
+
+exports.searchApplication = async (req, res, next) => {
+  try {
+    const { keyword } = req.body;
+    const applications = await Applications.findAll({
+      where: {
+        [Sequelize.Op.or]: [{ jobTitle: keyword }, { company: keyword }],
+      },
+    });
+    if (applications) {
+      return res.status(200).json({ applications: applications });
+    } else {
+      return res.status(201).json({ message: "no applications found" });
+    }
   } catch (err) {
     return res.status(500).json({ success: false, err: err.message });
   }

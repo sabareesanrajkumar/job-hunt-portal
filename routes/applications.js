@@ -16,6 +16,12 @@ router.get(
   applicationController.getApplication
 );
 
+router.post(
+  "/search",
+  authenticationController.authenticate,
+  applicationController.searchApplication
+);
+
 router.put(
   "/update/:id",
   authenticationController.authenticate,

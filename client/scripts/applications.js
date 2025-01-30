@@ -39,15 +39,21 @@
       { headers: { Authorization: token } }
     );
     if (response.data) {
-      const applicationRecord = document.getElementById("applicationsList");
-      applicationRecord.innerHTML = "";
+      renderApplications(response.data);
+    }
+  }
 
-      response.data.applications.forEach((app) => {
-        const appDiv = document.createElement("div");
-        appDiv.classList.add("application-card");
-        appDiv.dataset.id = app.id;
+  function renderApplications(data) {
+    const applicationRecord = document.getElementById("applicationsList");
+    applicationRecord.innerHTML = "";
+    console.log("in renderapps>>>>>>>>>>>>>>>>", data);
 
-        appDiv.innerHTML = `
+    data.applications.forEach((app) => {
+      const appDiv = document.createElement("div");
+      appDiv.classList.add("application-card");
+      appDiv.dataset.id = app.id;
+
+      appDiv.innerHTML = `
       <h4>${app.jobTitle} at ${app.company}</h4>
       <p>Date Applied: ${new Date(app.dateApplied).toLocaleDateString()}</p>
 
@@ -76,16 +82,15 @@
       <button class="update-btn">Update</button>
       <button class="delete-btn">Delete</button>
     `;
-        appDiv
-          .querySelector(".update-btn")
-          .addEventListener("click", () => updateApplication(app.id, appDiv));
-        appDiv
-          .querySelector(".delete-btn")
-          .addEventListener("click", () => deleteApplication(app.id));
+      appDiv
+        .querySelector(".update-btn")
+        .addEventListener("click", () => updateApplication(app.id, appDiv));
+      appDiv
+        .querySelector(".delete-btn")
+        .addEventListener("click", () => deleteApplication(app.id));
 
-        applicationRecord.appendChild(appDiv);
-      });
-    }
+      applicationRecord.appendChild(appDiv);
+    });
   }
 
   async function updateApplication(id, appDiv) {
@@ -147,3 +152,18 @@
       }
     });
 }
+
+document.getElementById("search-button").addEventListener("click", async () => {
+  const keyword = document.getElementById("search-keyword").value;
+  const searchResponse = await axios.post(
+    `${backendApi}/application/search`,
+    { keyword },
+    { headers: { Authorization: token } }
+  );
+  if (searchResponse.status == 201) {
+    alert(`No application found`);
+  }
+  if (searchResponse.status === 200) {
+    renderApplications(searchResponse.data);
+  }
+});
