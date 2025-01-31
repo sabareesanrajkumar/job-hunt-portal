@@ -51,10 +51,27 @@
         <div id="applications-container">
             <h2>Applications</h2>
             <div class="header">
+                <div class="filter">
+                    <p>Filter either by date or status</p>
+                    <form id="filter-form">
+                        <label for="start-date">Start Date:</label>
+                        <input type="date" id="start-date" name="startDate"/>
+                        <label for="status">status:</label>
+                        <select id="status" name="status">
+                            <option value="select status">Select Status</option>
+                            <option value="Applied">Applied</option>
+                            <option value="Interview Scheduled">Interview Scheduled</option>
+                            <option value="Offer Received">Offer Received</option>
+                            <option value="Rejeced">Rejected</option>
+                        </select>
+                        <button type="submit" id="filter-button">Filter</button>
+                    </form>
+                </div>
                 <div class="search">
                     <input type="text" id="search-keyword" placeholder="Search by company or job title">
                     <button id="search-button">Search</button>
                 </div>
+                
                 <button id="add-application-btn">Add Application</button>
             </div>
             <h3>Applications List</h3>

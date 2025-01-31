@@ -39,6 +39,10 @@
       { headers: { Authorization: token } }
     );
     if (response.data) {
+      localStorage.setItem(
+        "applications",
+        JSON.stringify(response.data.applications)
+      );
       renderApplications(response.data);
     }
   }
@@ -46,7 +50,6 @@
   function renderApplications(data) {
     const applicationRecord = document.getElementById("applicationsList");
     applicationRecord.innerHTML = "";
-    console.log("in renderapps>>>>>>>>>>>>>>>>", data);
 
     data.applications.forEach((app) => {
       const appDiv = document.createElement("div");
@@ -106,6 +109,7 @@
       console.log(response);
       if (response.status == 200) {
         alert("Application updated successfully!");
+        showApplications();
       }
     } catch (error) {
       console.error("Error updating application:", error);
@@ -166,4 +170,31 @@ document.getElementById("search-button").addEventListener("click", async () => {
   if (searchResponse.status === 200) {
     renderApplications(searchResponse.data);
   }
+});
+
+document.getElementById("filter-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const startDate = new Date(document.getElementById("start-date").value);
+  const status = document.getElementById("status").value;
+  const applications = JSON.parse(localStorage.getItem("applications"));
+
+  let dateFilters = [];
+  if (startDate != "Invalid Date") {
+    dateFilters = applications.filter((app) => {
+      const appDate = new Date(app.dateApplied);
+      return appDate >= startDate;
+    });
+  }
+  let statusFilters = [];
+  if (status != "select status") {
+    statusFilters = applications.filter((app) => {
+      const appStatus = app.status;
+      return appStatus == status;
+    });
+  }
+
+  const sendResponse = {
+    applications: [...new Set([...dateFilters, ...statusFilters])],
+  };
+  renderApplications(sendResponse);
 });
