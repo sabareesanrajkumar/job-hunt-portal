@@ -66,36 +66,38 @@ exports.download = async (req, res) => {
       return res.status(404).json({ error: "File not found in the database" });
     }
 
-    const fileKey = fileKeyResponse[0].dataValues.fileKey;
-    console.log("File Key:", fileKey);
+    const fileKeys = fileKeyResponse.map((item) => item.dataValues.fileKey);
+    const fileData = [];
 
-    const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: fileKey,
-    };
+    for (const fileKey of fileKeys) {
+      const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: fileKey,
+      };
 
-    s3.getObject(params, (err, data) => {
-      if (err) {
+      try {
+        const data = await s3.getObject(params).promise();
+        const contentType = data.ContentType;
+        let fileExtension = "";
+        if (contentType === "image/png") {
+          fileExtension = ".png";
+        } else if (contentType === "application/pdf") {
+          fileExtension = ".pdf";
+        } else if (contentType === "application/msword") {
+          fileExtension = ".doc";
+        }
+        fileData.push({
+          fileKey,
+          contentType,
+          body: data.Body.toString("base64"),
+          fileExtension,
+        });
+      } catch (err) {
         console.error("Error retrieving file from S3:", err);
         return res.status(500).json({ error: "File download failed" });
       }
-
-      console.log("S3 Response Data:", data);
-
-      res.setHeader("Content-Type", data.ContentType);
-      const contentType = data.ContentType;
-      let fileExtension = "";
-      if (contentType === "image/png") {
-        fileExtension = ".png";
-      } else if (contentType === "application/pdf") {
-        fileExtension = ".pdf";
-      } else if (contentType === "application/msword") {
-        fileExtension = ".doc";
-      }
-      const fileNameWithExtension = fileKey + fileExtension;
-      res.attachment(fileNameWithExtension);
-      res.send(data.Body);
-    });
+    }
+    res.status(200).json({ files: fileData });
   } catch (error) {
     console.error("Error downloading file:", error);
     res.status(500).json({ error: "Internal server error" });

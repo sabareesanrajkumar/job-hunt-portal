@@ -10,20 +10,37 @@
         try {
           const downloadResponse = await axios.get(
             `${backendApi}/attachment/download/${event.target.dataset.id}`,
-            { headers: { Authorization: token }, responseType: "arraybuffer" }
+            { headers: { Authorization: token } }
           );
 
-          const fileBlob = new Blob([downloadResponse.data], {
-            type: downloadResponse.headers["content-type"],
+          downloadResponse.data.files.forEach((file) => {
+            const byteCharacters = atob(file.body);
+            const byteArrays = [];
+            for (
+              let offset = 0;
+              offset < byteCharacters.length;
+              offset += 512
+            ) {
+              const slice = byteCharacters.slice(offset, offset + 512);
+              const byteNumbers = new Array(slice.length);
+
+              for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+              }
+
+              const byteArray = new Uint8Array(byteNumbers);
+              byteArrays.push(byteArray);
+            }
+            const fileBlob = new Blob(byteArrays, { type: file.contentType });
+            const fileUrl = URL.createObjectURL(fileBlob);
+
+            const a = document.createElement("a");
+            a.href = fileUrl;
+            a.download = file.fileKey;
+            a.click();
+
+            URL.revokeObjectURL(fileUrl);
           });
-          const fileUrl = URL.createObjectURL(fileBlob);
-
-          const a = document.createElement("a");
-          a.href = fileUrl;
-          a.download = event.target.dataset.id;
-          a.click();
-
-          URL.revokeObjectURL(fileUrl);
         } catch (error) {
           console.error("Error downloading the file:", error);
         }

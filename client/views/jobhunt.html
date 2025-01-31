@@ -1,203 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Hunt</title>
-    <link rel="stylesheet" href="../css/jobhunt.css">
-    <link rel="stylesheet" href="../css/progress.css">
-    <link rel="stylesheet" href="../css/applications.css">
+    <link rel="stylesheet" href="../css/jobhunt.css" />
+    <link rel="stylesheet" href="../css/progress.css" />
+    <link rel="stylesheet" href="../css/applications.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="header">
-        <div id="nav-bar">
-            <ul class="nav-list">
-                <li id="profile-list">Profile</li>
-                <li id="applications-list">Applications</li>
-                <li id="companies-list">Companies</li>
-                <li id="reminder-list">Reminders</li>
-                <li id="progress-list">progress</li>
-            </ul>
-        </div>
+      <div id="nav-bar">
+        <ul class="nav-list">
+          <li id="profile-list">Profile</li>
+          <li id="applications-list">Applications</li>
+          <li id="companies-list">Companies</li>
+          <li id="reminder-list">Reminders</li>
+          <li id="progress-list">progress</li>
+        </ul>
+      </div>
     </div>
     <div id="container">
-        
-        <div id="profile-container">
-            <div class="header">
-                <h3>profile</h3>
-                <button id="edit-profile-btn">Edit profile</button>
-            </div>
-            <div id="profile-details"></div>
-            <div id="edit-profile-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-modal">&times;</span>
-                    <h2>User Details</h2>
-                    <form id="edit-profile">
-                        <input type="text" id="name" name="name" placeholder="Full Name" required>
-                        <input type="text" id="college" name="college" placeholder="College" required>
-                        <input type="text" id="degree" name="degree" placeholder="Degree" required>
-                        <input type="text" id="branch" name="branch" placeholder="Branch" required>
-                        <input type="number" id="graduation" name="graduation" placeholder="Year of Graduation" required>
-                        <input type="number" id="score" name="score" placeholder="Overall Academic Score" required>
-                        <input type="text" id="goals" name="goals" placeholder="Career goals" required>
-                        <button type="submit">Update Profile</button>
-                    </form>
-                </div>
-            </div>
+      <div id="profile-container">
+        <div class="header">
+          <h3>profile</h3>
+          <button id="edit-profile-btn">Edit profile</button>
         </div>
-
-        <div id="applications-container">
-            <h2>Applications</h2>
-            <div class="header">
-                <div class="filter">
-                    <p>Filter either by date or status</p>
-                    <form id="filter-form">
-                        <label for="start-date">Start Date:</label>
-                        <input type="date" id="start-date" name="startDate"/>
-                        <label for="status">status:</label>
-                        <select id="status" name="status">
-                            <option value="select status">Select Status</option>
-                            <option value="Applied">Applied</option>
-                            <option value="Interview Scheduled">Interview Scheduled</option>
-                            <option value="Offer Received">Offer Received</option>
-                            <option value="Rejeced">Rejected</option>
-                        </select>
-                        <button type="submit" id="filter-button">Filter</button>
-                    </form>
-                </div>
-                <div class="search">
-                    <input type="text" id="search-keyword" placeholder="Search by company or job title">
-                    <button id="search-button">Search</button>
-                </div>
-                
-                <button id="add-application-btn">Add Application</button>
-            </div>
-            <h3>Applications List</h3>
-            <div id="applicationsList">
-                <ul id="applications"></ul>
-            </div>
-            <div id="application-details"></div>
-            <div id="add-application-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-application-modal">&times;</span>
-                    <h3>Application Details</h3>
-                    <form id="add-application">
-                        <input type="text" id="job-title" name="jobTitle" placeholder="Job Title" required>
-                        <input type="text" id="company-nanme" name="companyName" placeholder="Company Name" required>
-                        <label for="dateApplied">Date Applied:</label>
-                        <input type="date" id="dateApplied" name="dateApplied" required>
-                        <label for="status">Status:</label>
-                        <select id="status" name="status">
-                            <option value="Applied">Applied</option>
-                            <option value="Interview Scheduled">Interview Scheduled</option>
-                            <option value="Offer Received">Offer Received</option>
-                        </select>
-                        <label for="notes">Notes:</label>
-                        <textarea id="notes" name="notes"></textarea>
-                        <label for="attachments">Attach Files:</label>
-                        <input type="file" id="attachments" name="attachments" multiple>
-                        <button type="submit">Add Application</button>
-                    </form>
-                </div>
-            </div>
+        <div id="profile-details"></div>
+        <div id="edit-profile-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>User Details</h2>
+            <form id="edit-profile">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Full Name"
+                required
+              />
+              <input
+                type="text"
+                id="college"
+                name="college"
+                placeholder="College"
+                required
+              />
+              <input
+                type="text"
+                id="degree"
+                name="degree"
+                placeholder="Degree"
+                required
+              />
+              <input
+                type="text"
+                id="branch"
+                name="branch"
+                placeholder="Branch"
+                required
+              />
+              <input
+                type="number"
+                id="graduation"
+                name="graduation"
+                placeholder="Year of Graduation"
+                required
+              />
+              <input
+                type="number"
+                id="score"
+                name="score"
+                placeholder="Overall Academic Score"
+                required
+              />
+              <input
+                type="text"
+                id="goals"
+                name="goals"
+                placeholder="Career goals"
+                required
+              />
+              <button type="submit">Update Profile</button>
+            </form>
+          </div>
         </div>
+      </div>
 
-        <div id="companies-container">
-            <div class="header">
-                <h3>companies</h3>
-                <button id="add-company-btn">Add Company</button>
-            </div>
-            <div id="Company-details"></div>
-            <div id="add-company-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-company-modal">&times;</span>
-                    <h2>company Details</h2>
-                    <form id="add-company">
-                        <input type="text" id="name" name="name" placeholder="Company Name" required>
-                        <input type="text" id="location" name="location" placeholder="Job Location" required>
-                        <input type="text" id="address" name="address" placeholder="Company Address" required>
-                        <input type="email" id="email" name="email" placeholder="email" required>
-                        <input type="number" id="contact" name="contact" placeholder="Contact Details" required>
-                        <input type="number" id="size" name="size" placeholder="Compnay Size (No. of Employees)" required>
-                        <input type="text" id="industry" name="industry" placeholder="Industry" required>
-                        <button type="submit">Add company</button>
-                    </form>
-                </div>
-            </div>
-            <div class="header">
-                <h3>Job Listings</h3>
-                <button id="add-job-btn">Add Job</button>
-            </div>
-            <div id="Job-details"></div>
-            <div id="add-job-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-job-modal">&times;</span>
-                    <h2>Job Details</h2>
-                    <form id="add-job">
-                        <input type="text" id="job-title" name="jobTitle" placeholder="Job Title" required />
-                        <input type="text" id="company-name" name="company" placeholder="Company Name" required />
-                        <textarea id="job-description" name="description" placeholder="Job Description" required></textarea>
-                        <input type="text" id="required-skills" name="requiredSkills" placeholder="Required Skills" required />
-                        <select id="job-type"  name="jobType" required>
-                            <option value="" disabled selected>Job Type</option>
-                            <option value="Full-time">Full-time</option>
-                            <option value="Part-time">Part-time</option>
-                            <option value="Remote">Remote</option>
-                        </select>
-                        <input type="text" id="salary-range" name="salary" placeholder="Salary Range" required />
-                        <input type="text" id="location" name="location" placeholder="Location" required />
-                        <input type="date" id="application-deadline" name="deadline" placeholder="Application Deadline" required />
-                        <button type="submit">Add job</button>
-                    </form>
-                </div>
-            </div>
+      <div id="applications-container">
+        <h2>Applications</h2>
+        <div class="header">
+          <div class="filter">
+            <p>Filter either by date or status</p>
+            <form id="filter-form">
+              <label for="start-date">Start Date:</label>
+              <input type="date" id="start-date" name="startDate" />
+              <label for="status">status:</label>
+              <select id="status" name="status">
+                <option value="select status">Select Status</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview Scheduled">Interview Scheduled</option>
+                <option value="Offer Received">Offer Received</option>
+                <option value="Rejeced">Rejected</option>
+              </select>
+              <button type="submit" id="filter-button">Filter</button>
+            </form>
+          </div>
+          <div class="search">
+            <input
+              type="text"
+              id="search-keyword"
+              placeholder="Search by company or job title"
+            />
+            <button id="search-button">Search</button>
+          </div>
+
+          <button id="add-application-btn">Add Application</button>
         </div>
-
-        <div id="reminder-container">
-            <div class="header">
-                <h3>Reminders</h3>
-                <button id="add-reminder-btn">Add Reminder</button>
-            </div>
-            <div id="reminder-details"></div>
-            <div id="add-reminder-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-reminder-modal">&times;</span>
-                    <h2>Reminder</h2>
-                    <form id="add-reminder">
-                        <input type="text" id="name" name="name" placeholder="Company Name" required>
-                        <input type="text" id="application" name="application" placeholder="application" required>
-                        <label for="due">Set Application Due Date & Time:</label>
-                        <input type="datetime-local" id="due" name="due" placeholder="Application Due" required>
-                        <label for="reminder">Set Reminder Date & Time:</label>
-                        <input type="datetime-local" id="reminder" name="reminder" placeholder="Reminder Time" required>
-                        <button type="submit">Add Reminder</button>
-                    </form>
-                </div>
-            </div>
+        <h3>Applications List</h3>
+        <div id="applicationsList">
+          <ul id="applications"></ul>
         </div>
-
-        <div id="progress-container">
-            <div class="dashboard">
-                <h3>Job Tracker Dashboard</h3>
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <h3>Total Applications</h3>
-                        <p id="totalApplications">0</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Applications In Progress</h3>
-                        <p id="inProgressApplications">0</p>
-                    </div>
-                </div>
-        
-                <div class="chart-container">
-                    <canvas id="applicationsChart"></canvas>
-                </div>
-            </div>
-
+        <div id="application-details"></div>
+        <div id="add-application-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-application-modal">&times;</span>
+            <h3>Application Details</h3>
+            <form id="add-application">
+              <input
+                type="text"
+                id="job-title"
+                name="jobTitle"
+                placeholder="Job Title"
+                required
+              />
+              <input
+                type="text"
+                id="company-nanme"
+                name="companyName"
+                placeholder="Company Name"
+                required
+              />
+              <label for="dateApplied">Date Applied:</label>
+              <input type="date" id="dateApplied" name="dateApplied" required />
+              <label for="status">Status:</label>
+              <select id="status" name="status">
+                <option value="Applied">Applied</option>
+                <option value="Interview Scheduled">Interview Scheduled</option>
+                <option value="Offer Received">Offer Received</option>
+              </select>
+              <label for="notes">Notes:</label>
+              <textarea id="notes" name="notes"></textarea>
+              <label for="attachments">Attach Files:</label>
+              <input type="file" id="attachments" name="attachments" multiple />
+              <button type="submit">Add Application</button>
+            </form>
+          </div>
         </div>
+      </div>
+
+      <div id="companies-container">
+        <div class="header">
+          <h3>companies</h3>
+          <button id="add-company-btn">Add Company</button>
+        </div>
+        <div id="Company-details"></div>
+        <div id="add-company-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-company-modal">&times;</span>
+            <h2>company Details</h2>
+            <form id="add-company">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Company Name"
+                required
+              />
+              <input
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Job Location"
+                required
+              />
+              <input
+                type="text"
+                id="address"
+                name="address"
+                placeholder="Company Address"
+                required
+              />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="email"
+                required
+              />
+              <input
+                type="number"
+                id="contact"
+                name="contact"
+                placeholder="Contact Details"
+                required
+              />
+              <input
+                type="number"
+                id="size"
+                name="size"
+                placeholder="Compnay Size (No. of Employees)"
+                required
+              />
+              <input
+                type="text"
+                id="industry"
+                name="industry"
+                placeholder="Industry"
+                required
+              />
+              <button type="submit">Add company</button>
+            </form>
+          </div>
+        </div>
+        <div class="header">
+          <h3>Job Listings</h3>
+          <button id="add-job-btn">Add Job</button>
+        </div>
+        <div id="Job-details"></div>
+        <div id="add-job-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-job-modal">&times;</span>
+            <h2>Job Details</h2>
+            <form id="add-job">
+              <input
+                type="text"
+                id="job-title"
+                name="jobTitle"
+                placeholder="Job Title"
+                required
+              />
+              <input
+                type="text"
+                id="company-name"
+                name="company"
+                placeholder="Company Name"
+                required
+              />
+              <textarea
+                id="job-description"
+                name="description"
+                placeholder="Job Description"
+                required
+              ></textarea>
+              <input
+                type="text"
+                id="required-skills"
+                name="requiredSkills"
+                placeholder="Required Skills"
+                required
+              />
+              <select id="job-type" name="jobType" required>
+                <option value="" disabled selected>Job Type</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Remote">Remote</option>
+              </select>
+              <input
+                type="text"
+                id="salary-range"
+                name="salary"
+                placeholder="Salary Range"
+                required
+              />
+              <input
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Location"
+                required
+              />
+              <input
+                type="date"
+                id="application-deadline"
+                name="deadline"
+                placeholder="Application Deadline"
+                required
+              />
+              <button type="submit">Add job</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="reminder-container">
+        <div class="header">
+          <h3>Reminders</h3>
+          <button id="add-reminder-btn">Add Reminder</button>
+        </div>
+        <div id="reminder-details"></div>
+        <div id="add-reminder-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-reminder-modal">&times;</span>
+            <h2>Reminder</h2>
+            <form id="add-reminder">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Company Name"
+                required
+              />
+              <input
+                type="text"
+                id="application"
+                name="application"
+                placeholder="application"
+                required
+              />
+              <label for="due">Set Application Due Date & Time:</label>
+              <input
+                type="datetime-local"
+                id="due"
+                name="due"
+                placeholder="Application Due"
+                required
+              />
+              <label for="reminder">Set Reminder Date & Time:</label>
+              <input
+                type="datetime-local"
+                id="reminder"
+                name="reminder"
+                placeholder="Reminder Time"
+                required
+              />
+              <button type="submit">Add Reminder</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="progress-container">
+        <div class="dashboard">
+          <h3>Job Tracker Dashboard</h3>
+          <div class="stats-container">
+            <div class="stat-card">
+              <h3>Total Applications</h3>
+              <p id="totalApplications">0</p>
+            </div>
+            <div class="stat-card">
+              <h3>Applications In Progress</h3>
+              <p id="inProgressApplications">0</p>
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="applicationsChart"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="../scripts/jobHunt.js"></script>
@@ -205,5 +368,5 @@
     <script src="../scripts/applications.js"></script>
     <script src="../scripts/jobListing.js"></script>
     <script src="../scripts/attachments.js"></script>
-</body>
+  </body>
 </html>
