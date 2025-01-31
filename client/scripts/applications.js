@@ -78,20 +78,24 @@
 
       <label>Notes:</label>
       <textarea class="notes-field">${app.notes || ""}</textarea>
-
-      <label>Attachments:</label>
-      <input type="file" class="attachments-input" multiple>
-
+      <div class="attachments">
+        <label>Attachments:</label>
+        <input type="file" class="attachments-input" data-id="${
+          app.id
+        }" multiple>
+          <button class="upload-btn" data-id="${app.id}">upload</button>
+        <button class="download-btn" data-id="${app.id}">download</button>
+      </div>
       <button class="update-btn">Update</button>
       <button class="delete-btn">Delete</button>
     `;
+
       appDiv
         .querySelector(".update-btn")
         .addEventListener("click", () => updateApplication(app.id, appDiv));
       appDiv
         .querySelector(".delete-btn")
         .addEventListener("click", () => deleteApplication(app.id));
-
       applicationRecord.appendChild(appDiv);
     });
   }

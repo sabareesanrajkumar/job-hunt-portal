@@ -18,6 +18,7 @@ const reminderRoutes = require("./routes/reminders");
 const progressRoutes = require("./routes/progress");
 const applicationRoutes = require("./routes/applications");
 const jobListingRoutes = require("./routes/jobListing");
+const attachmentRoutes = require("./routes/attachments");
 
 app.use("/user", userRoutes);
 app.use("/password", passwordRoutes);
@@ -27,6 +28,7 @@ app.use("/reminder", reminderRoutes);
 app.use("/progress", progressRoutes);
 app.use("/application", applicationRoutes);
 app.use("/joblisting", jobListingRoutes);
+app.use("/attachment", attachmentRoutes);
 
 const Users = require("./models/users");
 const passwordRequests = require("./models/passwordRequests");
