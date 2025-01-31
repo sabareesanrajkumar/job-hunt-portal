@@ -186,7 +186,7 @@ h3 {
     font-size: 12px;
 }
 
-#filter-form input,#filter-form select {
+#filter-form input,#filter-form select,#add-job select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;

@@ -126,7 +126,33 @@
                     </form>
                 </div>
             </div>
-
+            <div class="header">
+                <h3>Job Listings</h3>
+                <button id="add-job-btn">Add Job</button>
+            </div>
+            <div id="Job-details"></div>
+            <div id="add-job-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-job-modal">&times;</span>
+                    <h2>Job Details</h2>
+                    <form id="add-job">
+                        <input type="text" id="job-title" name="jobTitle" placeholder="Job Title" required />
+                        <input type="text" id="company-name" name="company" placeholder="Company Name" required />
+                        <textarea id="job-description" name="description" placeholder="Job Description" required></textarea>
+                        <input type="text" id="required-skills" name="requiredSkills" placeholder="Required Skills" required />
+                        <select id="job-type"  name="jobType" required>
+                            <option value="" disabled selected>Job Type</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Remote">Remote</option>
+                        </select>
+                        <input type="text" id="salary-range" name="salary" placeholder="Salary Range" required />
+                        <input type="text" id="location" name="location" placeholder="Location" required />
+                        <input type="date" id="application-deadline" name="deadline" placeholder="Application Deadline" required />
+                        <button type="submit">Add job</button>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <div id="reminder-container">
@@ -177,5 +203,6 @@
     <script src="../scripts/jobHunt.js"></script>
     <script src="../scripts/progress.js"></script>
     <script src="../scripts/applications.js"></script>
+    <script src="../scripts/jobListing.js"></script>
 </body>
 </html>
